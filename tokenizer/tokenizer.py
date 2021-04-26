@@ -1,14 +1,5 @@
 import re
 
-# keywordsRegex = "^int$|^double$|^float$|^while$|^include$|^main$|^for$|^if$|^return$|^scanf$|^printf$|^%d$"
-# headerfileRegex = "^[A-Za-z\.]+"
-# numbersRegex = "^[+-]*\d+\.?\d*$"
-# arithmeticOp = "[\+\-\/\*\++\--]"
-# relationalOpRegex = "<|<=|>=|>|!=|==|!"
-# assignmentOp = "^=$"
-# newlineChar="^\n$"
-# specialsymbols="\#|\(|\)|\{|\}|\:|\;|\,|\%|\"|\&|\[|\]"
-# identifierRegex = "^[a-zA-Z_][a-zA-Z0-9]*$"
 
 def tokenizer(string:str):
     token_rexes=[
@@ -17,7 +8,6 @@ def tokenizer(string:str):
         (re.compile(r"^[0-9]+\.?[0-9]*"),"NUM"),
         (re.compile(r"^[A-Za-z]+\.[A-Za-z]+"),"HEADERFILE"),
         (re.compile(r"^[A-Za-z_][A-Za-z0-9_]*"),"ID"),
-       
         (re.compile(r"^\n"),"NEWLINE"),
         (re.compile(r"^[+*/-]"),"ARITHMETIC OP"),
         (re.compile(r"^<=|^>=|^<|^>|^\!\=|^\=\=|^\+\="),"RELATIONAL OP"),
@@ -29,9 +19,7 @@ def tokenizer(string:str):
 
     ]
     tokens=[]
-# tk=RegexpTokenizer("[\w\.\w.*]+|\d+\.?\d*|<=|>=|>|!=|!|\++|--|<|==|[^ ]|[A-Za-z\[\d+|\w\]]+")
-# input_tokens=tk.tokenize(file)
-# print(input_tokens)
+
     while len(string):
         string=string.lstrip()
         matched=False
