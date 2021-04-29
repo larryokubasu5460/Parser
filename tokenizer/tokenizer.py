@@ -33,6 +33,7 @@ def tokenizer(string:str):
                 string=string.lstrip()
                 break  #break out of the inner loop
         if not matched:
+            print(f"Unexpected string {string}")
             raise Exception("Invalid string")
     return tokens
 

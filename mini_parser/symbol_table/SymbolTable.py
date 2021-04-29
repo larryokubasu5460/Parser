@@ -3,7 +3,7 @@ class SymbolTable:
     symbols=dict()
 
     @staticmethod
-    def add_symbol(name,value):
+    def add_symbol(name,value=0):
         
         for key in SymbolTable.symbols:
             if key==name:

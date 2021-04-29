@@ -1,5 +1,5 @@
 from tokenizer import tokenizer
-from mini_parser import mini_parser
+from mini_parser import Parser
 
 while(True):
     try:
@@ -10,6 +10,46 @@ while(True):
 
         tokens=tokenizer(file)
         print("Tokens: ", tokens)
-
+        P=Parser(tokens)
+        P.parse()
+    
     except KeyboardInterrupt:
         exit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # print(P.current)
+    # P.advance()
+    # print(P.current)
+    # P.advance()
+    # print(P.current)
+    # print("Peek", P.peek())
+    # P.advance()
+    # print(P.current)

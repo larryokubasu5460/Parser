@@ -2,8 +2,13 @@
 
 int main(){
     int x=0;
+    int z;
+    int m;
+    int y;
     while(x<10){
         puts(x);
+        y=90+8;
+        m=90*87;
         x++;
     }
     return 0;
