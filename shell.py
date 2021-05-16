@@ -12,44 +12,9 @@ while(True):
         print("Tokens: ", tokens)
         P=Parser(tokens)
         P.parse()
+        print("Mini Tree\n",repr(P.tree))
     
     except KeyboardInterrupt:
         exit()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # print(P.current)
-    # P.advance()
-    # print(P.current)
-    # P.advance()
-    # print(P.current)
-    # print("Peek", P.peek())
-    # P.advance()
-    # print(P.current)
