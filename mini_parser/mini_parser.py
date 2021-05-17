@@ -37,7 +37,8 @@ class Parser:
             return self.parse_program()
 
     def parse_puts(self):
-        self.advance()
+        putsvalue=self.current
+        self.advance() 
         i=self.position
         # print("Parsing puts")
         # print(self.current)
@@ -48,6 +49,7 @@ class Parser:
             j=self.position
             data=[x[0] for x in self.tokens[i:j]]
             self.whilenode.addChild(TreeNode(data))
+            SymbolTable.add_symbol(putsvalue,data)
             # print(self.current)
             # print(self.peek())
 
@@ -143,16 +145,24 @@ class Parser:
             # print(self.current)
             # print("Parsing arithmetic")
             i=self.position
+            assignedvalue=self.current
             self.parse_arithmetics()
             j=self.position
             data=[x[0] for x in self.tokens[i:j]]
             self.whilenode.addChild(TreeNode(data))
+            SymbolTable.add_symbol(assignedvalue,data)
             self.advance()
 
         if self.peek()[1]=="(IN|DE)CREMENT":
+            sign=self.peek()[0]
+            incrementvalue=self.current
+            i=self.position
             self.advance()
             self.advance()
+            j=self.position
             self.advance()
+            data=[x[0] for x in self.tokens[i:j]]
+            SymbolTable.add_symbol(incrementvalue+sign,data)
             self.variableNode.addChild(self.whilenode)
             # print("Out of while")
             
@@ -172,6 +182,8 @@ class Parser:
         # if statement list is while
         if self.current=='while':
             # print("Parsing arguments of while")
+            whilevalue=self.current
+            SymbolTable.add_symbol(whilevalue)
             self.advance()
             i=self.position
             if self.current=="(":
@@ -186,6 +198,7 @@ class Parser:
         
                             self.advance()
                             self.advance()
+                            SymbolTable.add_symbol(whilevalue,[x[0] for x in self.tokens[i:self.position]])
                             self.advance()
                             if self.current=="{":
                                 # parse inside while
@@ -213,15 +226,17 @@ class Parser:
                                 self.inside_while()
                                 self.advance()
                                 j=self.position
-                                data=zip(*self.tokens[i:j])[0]
-                                self.whilenode.addChild(data)
+                                data=[x[0] for x in self.tokens[i:j]]
+                                self.whilenode.addChild(TreeNode(data))
 
                         
         elif self.current=="puts":
+            putvalue=self.current
             i=self.position
             self.parse_puts()
             j=self.position
-            data=zip(*self.tokens[i:j])[0]
+            data=[x[0] for x in self.tokens[i:j]]
+            SymbolTable.add_symbol(putvalue,data)
             self.putTree=TreeNode(data)
             self.variableNode.addChild(self.putTree)
         else:
