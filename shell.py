@@ -13,7 +13,7 @@ while(True):
         print("Tokens: ", tokens)
         P=Parser(tokens)
         P.parse()
-        # print("Mini Tree\n",repr(P.tree))
+        print("Mini Tree\n",repr(P.tree))
         # print("SymbolTable\n",SymbolTable.symbols)
         print("code generator")
         cg(SymbolTable.symbols)
