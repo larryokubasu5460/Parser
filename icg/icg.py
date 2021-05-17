@@ -19,7 +19,7 @@ def CodeGenerator(object):
             print(("Label", "L1"))
             for x in value:
                 if '<' in value:
-                    print(("Lt","t1",str(value[-2]),str(value[-1])))
+                    print(("Lt","t1",str(value[-3]),str(value[-2]),str(value[-1])))
                     break
             print(("NOT","t2","t1"))
             print(("IF", "t2","L2"))
