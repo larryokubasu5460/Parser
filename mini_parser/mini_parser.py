@@ -198,8 +198,9 @@ class Parser:
         
                             self.advance()
                             self.advance()
-                            SymbolTable.add_symbol(whilevalue,[x[0] for x in self.tokens[i:self.position]])
+                          
                             self.advance()
+                            SymbolTable.add_symbol(whilevalue,[x[0] for x in self.tokens[i:self.position]])
                             if self.current=="{":
                                 # parse inside while
                                 self.advance()
@@ -271,17 +272,19 @@ class Parser:
         if self.peek()[1]=='ASSIGN':
             # declaration with assignment
             name=self.current
+            SymbolTable.add_symbol(name)
             self.advance()
             self.advance()
-            value=self.current
-            SymbolTable.add_symbol(name,value)
+            value=self.current            
             # print("Parsed assignment succesffuly")
             self.advance()
-            j=self.position
-            data=[x[0] for x in self.tokens[i:j]]
+            # j=self.position
+           
+            # data=[x[0] for x in self.tokens[i:j]]
             self.variableNode=TreeNode("Assignment")
-            self.variableNode.addChild(TreeNode(data))
+            # self.variableNode.addChild(TreeNode(data))
             self.tree.addChild(self.variableNode)
+          
             if self.peek()[0] in ['int','float']:
                 i=self.position
                 self.advance()
@@ -291,11 +294,13 @@ class Parser:
                 data=[x[0] for x in self.tokens[i:j]]
                 self.variableNode.addChild(TreeNode(data))
             else:
-                i=self.position
+                # i=self.position
                 self.parse_statements()
+                self.advance()
                 j=self.position
                 data=[x[0] for x in self.tokens[i:j]]
                 self.variableNode.addChild(TreeNode(data))
+               
         else:
             # declaration with no assignment
             self.name=self.current
@@ -378,7 +383,7 @@ class Parser:
                 if self.current == "{":
                     # print("Parsing Inside parenthesis") 
                     j=self.position
-                    data=[x[0] for x in self.tokens[i:j]]
+                    data=[x[0] for x in self.tokens[i:j+1]]
                     self.tree.addChild(TreeNode(data))
                     self.main_body2() 
         else:
